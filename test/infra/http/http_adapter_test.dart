@@ -20,7 +20,8 @@ class HttpAdapter {
       'content-type': 'application/jason',
       'accept': 'application/jason',
     };
-    await client.post(Uri.parse(url), headers: headers, body: jsonEncode(body));
+    final jsonBody = body != null ? jsonEncode(body) : null;
+    await client.post(Uri.parse(url), headers: headers, body: jsonBody);
   }
 }
 
@@ -50,6 +51,21 @@ void main() {
             'accept': 'application/jason',
           },
           body: '{"any_key":"any_value"}'));
+    });
+    test('Should call post without body', () async {
+      final client = ClientSpy();
+      final sut = HttpAdapter(client);
+      final url = faker.internet.httpUrl();
+
+      await sut.request(url: url, method: 'post');
+
+      verify(client.post(
+        Uri.parse(url),
+        headers: {
+          'content-type': 'application/jason',
+          'accept': 'application/jason',
+        },
+      ));
     });
   });
 }
