@@ -22,7 +22,9 @@ void main() {
     params = AuthenticationParams(
         email: faker.internet.email(), secret: faker.internet.password());
   });
-  test('Should call HttpClient with correct values', () async {
+  test(
+    'Should call HttpClient with correct values',
+    () async {
       when(httpClients.request(
               url: anyNamed('url'),
               method: anyNamed('method'),
@@ -98,5 +100,20 @@ void main() {
     final account = await sut.auth(params);
 
     expect(account.token, accessToken);
+  });
+  test(
+      'Should throw UnexpectedError  if HttpClient returns 200 with invalid data',
+      () async {
+    when(httpClients.request(
+            url: anyNamed('url'),
+            method: anyNamed('method'),
+            body: anyNamed('body')))
+        .thenAnswer((_) async => {
+              'invalid_key': 'invalid_value ',
+            });
+
+    final future = sut.auth(params);
+
+    expect(future, throwsA(DomainError.unexpected));
   });
 }
