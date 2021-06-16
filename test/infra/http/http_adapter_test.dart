@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:faker/faker.dart';
 import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
