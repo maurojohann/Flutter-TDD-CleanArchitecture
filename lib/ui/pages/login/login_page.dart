@@ -46,18 +46,31 @@ class LoginPage extends StatelessWidget {
                       }),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 32.0),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Senha',
-                          icon: Icon(
-                            Icons.lock,
-                            color: Theme.of(context).colorScheme.primary,
-                          )),
-                      obscureText: true,
-                      onChanged: presenter.validatePassword,
-                    ),
+                    child: StreamBuilder<String>(
+                        stream: presenter.passwordErrorStream,
+                        builder: (context, snapshot) {
+                          return TextFormField(
+                            decoration: InputDecoration(
+                                labelText: 'Senha',
+                                icon: Icon(
+                                  Icons.lock,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                                errorText: snapshot.data?.isEmpty == true
+                                    ? null
+                                    : snapshot.data),
+                            obscureText: true,
+                            onChanged: presenter.validatePassword,
+                          );
+                        }),
                   ),
-                  ElevatedButton(onPressed: null, child: Text('Entrar')),
+                  StreamBuilder<bool>(
+                      stream: presenter.isFormValidStream,
+                      builder: (context, snapshot) {
+                        return ElevatedButton(
+                            onPressed: snapshot.data == true ? () {} : null,
+                            child: Text('Entrar'));
+                      }),
                   TextButton.icon(
                       onPressed: () {},
                       icon: Icon(Icons.person),

@@ -8,9 +8,9 @@
 5.✅ Mostrar mensagem de erro se o email for inválido
 6.✅ Remover mensagem de erro se o email for válido
 7.✅ Validar senha quando o usuario digitar no campo
-8. Mostrar mensagem de erro se a senha for inválida
-9. Remover mensagem de erro se a senha for válida
-10. Habilitar o botão de fazer login se todos os campos forem válido
+8.✅ Mostrar mensagem de erro se a senha for inválida
+9.✅ Remover mensagem de erro se a senha for válida
+10.✅ Habilitar o botão de fazer login se todos os campos forem válido
 11. Desabilitar o botão de fazer longin se algum campo for inválido
 12. Exibir loading no inicio da ação de login
 13. Autenticar usuário com email e senha informados no formulário
