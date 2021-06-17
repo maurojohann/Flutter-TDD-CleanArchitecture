@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../pages/login_pages.dart';
+import '../pages/login/login_pages.dart';
 
 class App extends StatelessWidget {
   const App({Key key}) : super(key: key);
@@ -26,7 +26,9 @@ class App extends StatelessWidget {
               color: primaryColorDark),
         ),
       ),
-      home: LoginPage(),
+      home: LoginPage(
+        presenter: null,
+      ),
     );
   }
 }

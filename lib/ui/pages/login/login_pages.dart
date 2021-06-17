@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../components/components.dart';
+import '../../components/components.dart';
+import 'login_presenter.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key key}) : super(key: key);
+  final LoginPresenter presenter;
+
+  const LoginPage({Key key, this.presenter}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,7 @@ class LoginPage extends StatelessWidget {
                           color: Theme.of(context).colorScheme.primary,
                         )),
                     keyboardType: TextInputType.emailAddress,
+                    onChanged: presenter.validateEmail,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 32.0),
@@ -42,6 +46,7 @@ class LoginPage extends StatelessWidget {
                             color: Theme.of(context).colorScheme.primary,
                           )),
                       obscureText: true,
+                      onChanged: presenter.validatePassword,
                     ),
                   ),
                   ElevatedButton(onPressed: null, child: Text('Entrar')),
